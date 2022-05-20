@@ -1,4 +1,6 @@
-﻿namespace SayDB.IoJobs;
+﻿using SayDB.Props;
+
+namespace SayDB.IoJobs;
 internal record PropertiesJob(IoJobContext JobContext, PropInfo[] Properties)
 {
     public PropertiesJob(IoJobContext JobContext)

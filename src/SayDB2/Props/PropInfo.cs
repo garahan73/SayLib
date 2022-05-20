@@ -1,8 +1,7 @@
-﻿
-using SayDB.IoJobs;
+﻿using SayDB.IoJobs;
 using System.Reflection;
 
-namespace SayDB;
+namespace SayDB.Props;
 
 abstract record PropInfo(DbContext DbContext)
 {
@@ -23,7 +22,7 @@ record PropertyPropInfo(DbContext DbContext, PropertyInfo Prop) : PropInfo(DbCon
     public override object? GetValue(object obj) => Prop.GetValue(obj);
 
     public override void SetValue(object obj, object? propValue) => Prop.SetValue(obj, propValue);
-    
+
 }
 
 record FieldPropInfo(DbContext DbContext, FieldInfo Field) : PropInfo(DbContext)

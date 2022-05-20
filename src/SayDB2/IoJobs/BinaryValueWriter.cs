@@ -1,4 +1,6 @@
-﻿namespace SayDB.IoJobs;
+﻿using SayDB.Props;
+
+namespace SayDB.IoJobs;
 
 internal record BinaryValueWriter(IoJobContext JobContext, BinaryWriter binaryWriter)
     : IoJobContextOwner(JobContext)

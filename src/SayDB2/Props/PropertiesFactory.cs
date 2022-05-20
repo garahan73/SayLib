@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace SayDB;
+namespace SayDB.Props;
 
 internal class PropertiesFactory
 {

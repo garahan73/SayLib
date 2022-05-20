@@ -42,7 +42,8 @@ public class SayDB
             throw new Exception($"Type {type.FullName} is not registered to DB");
     }
 
+}
 
-
-
+record DbContext(string RootDataFolderPath, ConcurrentDictionary<Type, DbCollection> Collections)
+{
 }

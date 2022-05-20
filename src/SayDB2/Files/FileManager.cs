@@ -2,7 +2,7 @@
 using SayDB.IoJobs;
 using System.Collections.Concurrent;
 
-namespace SayDB;
+namespace SayDB.Files;
 
 internal class FileManager
 {
@@ -69,7 +69,7 @@ internal class FileManager
         return _ticketMap[key];
     }
 
-    
+
 
     public int GetOrCreateFileTicket(object key)
     {
@@ -102,7 +102,7 @@ internal class FileManager
 
     public async Task<Stream> LoadStreamAsync(object primaryKey)
     {
-        using(_actionLock.Lock())
+        using (_actionLock.Lock())
         {
             var fileTicket = GetFileTicket(primaryKey);
             var dataFilePath = GetDataFilePath(fileTicket);
@@ -112,7 +112,7 @@ internal class FileManager
 
     private static async Task<Stream> GetLoadStreamFromFileAsync(string dataFilePath)
         => new MemoryStream(await File.ReadAllBytesAsync(dataFilePath));
-        
+
 
     public async Task SaveFileAsync(object primaryKey, Stream stream)
     {
