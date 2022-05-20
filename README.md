@@ -49,7 +49,7 @@ Auto-Link example
 Query example using primary keys in memory
 //////////////////////////////////
 
-        var db = new SayDB(DB_DATA_FOLDER);
+        var db = new SayDB("c:/tmp/db");
         var collection = db.CreateCollection<Data, int>(d => d.ID);
 
         await collection.SaveAsync(new Data { ID = 3, Name = "a" });
