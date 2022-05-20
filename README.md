@@ -11,10 +11,10 @@ Basic Save/Load
         var db = new SayDB("c:/tmp/db");
 
 
-// register collection with data type and get primary key function
-// data type = Data
-// primary key type = int
-// get primary function = d => d.ID
+// register collection with data type and get primary key function<br/>
+ - data type = Data<br/>
+ - primary key type = int<br/>
+ - get primary function = d => d.ID<br/>
 
         var collection = db.CreateCollection<Data, int>(d => d.ID);
 
