@@ -71,7 +71,6 @@ Mutual reference auto-resolving example
 
         var db = new SayDB("c:/tmp/db");
         var mainCollection = db.CreateCollection<Data2, int>(d => d.ID);
-        mainCollection.Clear();
 
         var item1 = new Data2 { ID = 1, Name = "a" };
         var item2 = new Data2 { ID = 2, Name = "b" };
