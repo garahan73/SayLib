@@ -14,7 +14,7 @@ Basic Save/Load
 // register collection with data type and get primary key function<br/>
  - data type = Data<br/>
  - primary key type = int<br/>
- - get primary function = d => d.ID<br/>
+ - get primary key function = d => d.ID<br/>
 
         var collection = db.CreateCollection<Data, int>(d => d.ID);
 
@@ -49,7 +49,7 @@ Auto-Link example
 Query example using primary keys in memory
 //////////////////////////////////
 
-        var db = new SayDB(DB_DATA_FOLDER);
+        var db = new SayDB("c:/tmp/db");
         var collection = db.CreateCollection<Data, int>(d => d.ID);
 
         await collection.SaveAsync(new Data { ID = 3, Name = "a" });
@@ -71,7 +71,6 @@ Mutual reference auto-resolving example
 
         var db = new SayDB("c:/tmp/db");
         var mainCollection = db.CreateCollection<Data2, int>(d => d.ID);
-        mainCollection.Clear();
 
         var item1 = new Data2 { ID = 1, Name = "a" };
         var item2 = new Data2 { ID = 2, Name = "b" };
