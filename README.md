@@ -14,7 +14,7 @@ Basic Save/Load
 // register collection with data type and get primary key function<br/>
  - data type = Data<br/>
  - primary key type = int<br/>
- - get primary function = d => d.ID<br/>
+ - get primary key function = d => d.ID<br/>
 
         var collection = db.CreateCollection<Data, int>(d => d.ID);
 
