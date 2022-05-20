@@ -1,8 +1,8 @@
 ﻿using Nito.AsyncEx;
-using SayDB2.IoJobs;
+using SayDB.IoJobs;
 using System.Collections.Concurrent;
 
-namespace SayDB2;
+namespace SayDB;
 
 internal class FileManager
 {

@@ -1,6 +1,6 @@
-﻿using SayDB2.IoJobs;
+﻿using SayDB.IoJobs;
 
-namespace SayDB2;
+namespace SayDB;
 
 public abstract class DbCollection
 {

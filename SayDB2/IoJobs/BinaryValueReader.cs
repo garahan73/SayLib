@@ -1,4 +1,4 @@
-﻿namespace SayDB2.IoJobs;
+﻿namespace SayDB.IoJobs;
 
 internal record BinaryValueReader(IoJobContext JobContext, BinaryReader binaryReader)
 {

@@ -1,4 +1,4 @@
-﻿namespace SayDB2.IoJobs;
+﻿namespace SayDB.IoJobs;
 
 record IoJobContext(DbCollection Collection, AlreadyHandledItems AlreadyHandledItems)
 {

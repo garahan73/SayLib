@@ -1,11 +1,11 @@
-﻿using SayDB2.IoJobs;
+﻿using SayDB.IoJobs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SayDB2;
+namespace SayDB;
 internal record BytesConverter(IoJobContext JobContext, PropInfo[] Properties)
 {
     public BytesConverter(IoJobContext JobContext) 

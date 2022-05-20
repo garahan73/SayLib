@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SayDB2.IoJobs;
+namespace SayDB.IoJobs;
 
 internal class AlreadyHandledItems
 {

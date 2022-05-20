@@ -1,4 +1,4 @@
-namespace SayDB2.Test;
+namespace SayDB.Test;
 
 [TestClass]
 public class SayDBTest

@@ -1,4 +1,4 @@
-﻿namespace SayDB2;
+﻿namespace SayDB;
 
 internal class DbHelper
 {

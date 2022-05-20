@@ -1,8 +1,8 @@
 ﻿
-using SayDB2.IoJobs;
+using SayDB.IoJobs;
 using System.Reflection;
 
-namespace SayDB2;
+namespace SayDB;
 
 abstract record PropInfo(DbContext DbContext)
 {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Concurrent;
 
-namespace SayDB2;
+namespace SayDB;
 
 public class SayDB
 {
