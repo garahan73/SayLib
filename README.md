@@ -36,9 +36,11 @@ Auto-Link example
 
         await mainCollection.SaveAsync(new Data { ID = 3, Name = "a", Sub = new Sub { Key = 1, Title = "s1" } });
 
-        var sub = await subCollection.LoadAsync(1);
-        
+        var sub = await subCollection.LoadAsync(1);        
         Assert.AreEqual("s1", sub.Title);
+        
+        var main = await mainCollection.LoadAsync(3);        
+        Assert.AreEqual("s1", main.Sub.Title);
 
 //////////////////////////////////
 Query example using primary keys in memory
