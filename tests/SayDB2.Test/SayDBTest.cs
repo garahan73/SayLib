@@ -137,7 +137,7 @@ public class SayDBTest
     }
 
     [TestMethod]
-    public async Task DbTest5_1_NontDbSubItemAutoSaveAsync()
+    public async Task DbTest5_1_NonDbSubItemAutoSaveAsync()
     {
         var db = new SayDB(DB_DATA_FOLDER);
         var mainCollection = db.CreateCollection<Data, int>(d => d.ID);
@@ -163,7 +163,7 @@ public class SayDBTest
         var item = await mainCollection.LoadAsync(3);
         var sub = item.Sub ?? throw new NullReferenceException("Sub is null");
 
-        Assert.AreEqual("s1", sub.Title);
+        Assert.AreEqual("s1", item.Sub.Title);
     }
 
     [TestMethod]
