@@ -5,6 +5,11 @@
 		<LangVersion>8.0</LangVersion>
 		<Nullable>enable</Nullable>
 		<RootNamespace>Say32</RootNamespace>
+		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+		<Version>1.0.0</Version>
+		<Authors>CHOE, Se Hi</Authors>
+		<Description>Various tools to improve C# development productivity</Description>
+		<PackageProjectUrl>https://github.com/garahan73/SayLib</PackageProjectUrl>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Say32
 {
@@ -20,6 +21,15 @@ namespace Say32
             }
         }
 
+        public static async Task ForEachAsync<T>(this IEnumerable<T> enumerable, Func<T, Task> action)
+        {
+            foreach (var item in enumerable)
+            {
+                await action(item);
+            }
+        }
+
+
         public static IEnumerable<T> If<T>( this IEnumerable<T> enumerable, bool condition, Func<IEnumerable<T>, IEnumerable<T>> then, Func<IEnumerable<T>, IEnumerable<T>>? elseFunc = null )
             => condition ? then(enumerable) : elseFunc?.Invoke(enumerable) ?? enumerable;
 
@@ -31,6 +41,18 @@ namespace Say32
         public static IList Slice<T>( this IEnumerable enumerable, int offset, int size )
         {
             return enumerable.Cast<object>().ToList().Skip(offset).Take(size).ToList();
+        }
+
+        public static async Task<IEnumerable<TResult>> SelectAsync<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, Task<TResult>> asyncSelector)
+        {
+            var r = new List<TResult>();
+
+            foreach (var item in source)
+            {
+                r.Add( await asyncSelector(item));
+            }
+
+            return r;
         }
 
     }

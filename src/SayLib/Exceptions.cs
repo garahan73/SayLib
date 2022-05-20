@@ -7,6 +7,17 @@ namespace Say32
 {
 
     [Serializable]
+    public class ToAvoidWarningException : Exception
+    {
+        public ToAvoidWarningException() { }
+        public ToAvoidWarningException(string message) : base(message) { }
+        public ToAvoidWarningException(string message, Exception inner) : base(message, inner) { }
+        protected ToAvoidWarningException(
+          SerializationInfo info,
+          StreamingContext context) : base(info, context) { }
+    }
+
+    [Serializable]
     public class TypeMismatchException : Exception
     {
         public TypeMismatchException(Type expected, Type actual, Exception? inner = null) : this(expected.FullName, actual.FullName, inner) { }

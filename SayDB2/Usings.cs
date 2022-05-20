@@ -1,0 +1,1 @@
+global using Say32;
