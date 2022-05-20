@@ -41,6 +41,26 @@ Auto-Link example
         Assert.AreEqual("s1", sub.Title);
 
 //////////////////////////////////
+Query example using primary keys in memory
+//////////////////////////////////
+
+        var db = new SayDB(DB_DATA_FOLDER);
+        var collection = db.CreateCollection<Data, int>(d => d.ID);
+
+        await collection.SaveAsync(new Data { ID = 3, Name = "a" });
+        await collection.SaveAsync(new Data { ID = 4, Name = "b" });
+
+        var dataList = from key in collection.PrimaryKeys
+            where (int)key == 3
+            select collection.Load(key);
+
+        var array = dataList.ToArray();
+
+        Assert.AreEqual(1, array.Length);
+        Assert.AreEqual("a", array[0].Name);
+
+
+//////////////////////////////////
 Mutual reference auto-resolving example
 //////////////////////////////////
 
@@ -62,4 +82,5 @@ Mutual reference auto-resolving example
         Assert.AreEqual("a", item.Name);
         Assert.AreEqual(2, item.Pair?.ID);
         Assert.AreEqual("b", item.Pair?.Name);
+
 
