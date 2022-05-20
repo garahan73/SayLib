@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Concurrent;
 
 namespace SayDB.IoJobs;
 
@@ -30,5 +25,5 @@ internal class AlreadyHandledItems
         keyValueMap.TryAdd(primaryKey, value);
     }
 
-    public object GetObject(Type type, object primaryKey) => _map[type][primaryKey];
+    public object GetItemObject(Type type, object primaryKey) => _map[type][primaryKey];
 }

@@ -9,10 +9,10 @@ record IoJobContext(DbCollection Collection, AlreadyHandledItems AlreadyHandledI
 
     }
 
-    internal IoJobContext Copy(DbCollection collection) => new IoJobContext(collection, AlreadyHandledItems)
-    {
-        LoadClassProperties = LoadClassProperties
-    };
+    //internal IoJobContext Copy(DbCollection collection) => new IoJobContext(collection, AlreadyHandledItems)
+    //{
+    //    LoadClassProperties = LoadClassProperties
+    //};
 }
 
 record IoJobContextOwner(IoJobContext JobContext)

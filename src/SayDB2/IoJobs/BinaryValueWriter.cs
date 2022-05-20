@@ -54,7 +54,7 @@ internal record BinaryValueWriter(IoJobContext JobContext, BinaryWriter binaryWr
             var primaryKey = collection.GetPrimaryKey(value);
             await WriteBinaryValueAsync(primaryKey);
 
-            var newContext = JobContext.Copy(collection);
+            var newContext = JobContext with { Collection = collection };
 
             await new SaveJob(newContext).SaveAsync(value);
             
@@ -63,7 +63,16 @@ internal record BinaryValueWriter(IoJobContext JobContext, BinaryWriter binaryWr
         {
             var properties = PropertiesFactory.Create(type, DbContext);
 
-            var bytes = await new BytesConverter(JobContext, properties).ToBytesAsync(value);
+            var stream = await new PropertiesJob(JobContext, properties).ObjectToStreamAsync(value);
+
+            var memStream = stream as MemoryStream;
+            if (memStream == null)
+            {
+                memStream = new MemoryStream();
+                await stream.CopyToAsync(memStream);
+            }
+
+            var bytes = memStream.ToArray(); 
 
             binaryWriter.Write(bytes.Length);
             binaryWriter.Write(bytes);

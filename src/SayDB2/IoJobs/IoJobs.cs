@@ -14,8 +14,9 @@ record SaveJob(IoJobContext Context): IoJobContextOwner(Context)
         else
             AlreadyHandledItems.Add(type, primaryKey, data);
 
-        var bytes = await new BytesConverter(Context).ToBytesAsync(data);
-        await Collection.FileManager.SaveFileAsync(primaryKey, bytes);
+        using var stream = await new PropertiesJob(Context).ObjectToStreamAsync(data);
+
+        await Collection.FileManager.SaveFileAsync(primaryKey, stream);
     }
 }
 
@@ -27,17 +28,17 @@ record LoadJob(IoJobContext Context): IoJobContextOwner(Context)
 
         if (AlreadyHandledItems.Contains(type, primaryKey))
         {
-            return AlreadyHandledItems.GetObject(type, primaryKey);
+            return AlreadyHandledItems.GetItemObject(type, primaryKey);
         }
         else
         {
-            var bytes = await Collection.FileManager.LoadBytesAsync(primaryKey);
+            using var stream = await Collection.FileManager.LoadStreamAsync(primaryKey);
 
             var data = Collection.CreateEmptyObject();
 
             AlreadyHandledItems.Add(type, primaryKey, data);
 
-            await new BytesConverter(Context).FillObjectPropValuesAsync(bytes, data);
+            await new PropertiesJob(Context).StreamToObjectAsync(stream, data);
 
             return data;
         }

@@ -26,12 +26,12 @@ internal class FileManager
         {
             try
             {
-                var bytes = await LoadBytesFromFileAsync(file);
+                var stream = await GetLoadStreamFromFileAsync(file);
 
                 var ctx = new IoJobContext(collection) { LoadClassProperties = false };
 
                 var obj = collection.CreateEmptyObject();
-                await new BytesConverter(ctx).FillObjectPropValuesAsync(bytes, obj);
+                await new PropertiesJob(ctx).StreamToObjectAsync(stream, obj);
 
                 var fileTicket = int.Parse(Path.GetFileName(file));
                 var key = collection.GetPrimaryKey(obj);
@@ -100,20 +100,21 @@ internal class FileManager
         return Path.Combine(DataFolderPath, fileTicket.ToString());
     }
 
-    public async Task<byte[]> LoadBytesAsync(object primaryKey)
+    public async Task<Stream> LoadStreamAsync(object primaryKey)
     {
-        using(await _actionLock.LockAsync())
+        using(_actionLock.Lock())
         {
             var fileTicket = GetFileTicket(primaryKey);
             var dataFilePath = GetDataFilePath(fileTicket);
-            return await LoadBytesFromFileAsync(dataFilePath);
+            return await GetLoadStreamFromFileAsync(dataFilePath);
         }
     }
 
-    private static async Task<byte[]> LoadBytesFromFileAsync(string dataFilePath)
-        => await File.ReadAllBytesAsync(dataFilePath);
+    private static async Task<Stream> GetLoadStreamFromFileAsync(string dataFilePath)
+        => new MemoryStream(await File.ReadAllBytesAsync(dataFilePath));
+        
 
-    public async Task SaveFileAsync(object primaryKey, byte[] bytes)
+    public async Task SaveFileAsync(object primaryKey, Stream stream)
     {
         using (await _actionLock.LockAsync())
         {
@@ -121,7 +122,12 @@ internal class FileManager
 
             var dataFilePath = GetDataFilePath(fileTicket);
 
-            await File.WriteAllBytesAsync(dataFilePath, bytes);
+            using (var fileStream = File.Create(dataFilePath))
+            {
+                stream.Seek(0, SeekOrigin.Begin);
+                await stream.CopyToAsync(fileStream);
+            }
+            //await File.WriteAllBytesAsync(dataFilePath, bytes);
         }
     }
 

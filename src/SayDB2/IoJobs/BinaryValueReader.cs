@@ -62,7 +62,7 @@ internal record BinaryValueReader(IoJobContext JobContext, BinaryReader binaryRe
             if (primaryKey == null)
                 throw new Exception($"Primary key can't be null");
 
-            var newContext = JobContext.Copy(collection); 
+            var newContext = JobContext with { Collection = collection }; 
 
             return await new LoadJob(newContext).LoadAsync(primaryKey);
 
@@ -71,11 +71,13 @@ internal record BinaryValueReader(IoJobContext JobContext, BinaryReader binaryRe
         {
             var length = binaryReader.ReadInt32();
             var bytes = binaryReader.ReadBytes(length);
+            var stream = new MemoryStream(bytes);
 
             var obj = Activator.CreateInstance(type) ?? throw new ToAvoidWarningException();
 
             var properties = PropertiesFactory.Create(type, DbContext);
-            await new BytesConverter(JobContext, properties).FillObjectPropValuesAsync(bytes, obj);
+            await new PropertiesJob(JobContext, properties).StreamToObjectAsync(stream, obj);
+
             return obj;
         }
     }
