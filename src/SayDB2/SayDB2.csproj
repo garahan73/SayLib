@@ -5,6 +5,11 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <RootNamespace>SayDB</RootNamespace>
+    <Authors>CHOE, Se Hi</Authors>
+    <Description>Simple and easy DB for casual use.
+Please refer to SayDB2.Test project for usage.</Description>
+    <PackageProjectUrl>https://github.com/garahan73/SayLib</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/garahan73/SayLib</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
