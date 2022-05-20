@@ -6,7 +6,7 @@
 Basic Save/Load
 //////////////////////////////////
 
-// create DB
+// create DB with data directory location
 
         var db = new SayDB("c:/tmp/db");
 
